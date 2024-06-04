@@ -1,0 +1,8 @@
+C:\Users\user\source\repos\AgileSolutionsConsoleProject\ConsoleProject\bin\Debug\ConsoleProject.exe.config
+C:\Users\user\source\repos\AgileSolutionsConsoleProject\ConsoleProject\bin\Debug\ConsoleProject.exe
+C:\Users\user\source\repos\AgileSolutionsConsoleProject\ConsoleProject\bin\Debug\ConsoleProject.pdb
+C:\Users\user\source\repos\AgileSolutionsConsoleProject\ConsoleProject\obj\Debug\ConsoleProject.csproj.AssemblyReference.cache
+C:\Users\user\source\repos\AgileSolutionsConsoleProject\ConsoleProject\obj\Debug\ConsoleProject.csproj.SuggestedBindingRedirects.cache
+C:\Users\user\source\repos\AgileSolutionsConsoleProject\ConsoleProject\obj\Debug\ConsoleProject.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\AgileSolutionsConsoleProject\ConsoleProject\obj\Debug\ConsoleProject.exe
+C:\Users\user\source\repos\AgileSolutionsConsoleProject\ConsoleProject\obj\Debug\ConsoleProject.pdb
