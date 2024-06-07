@@ -12,6 +12,8 @@ namespace ConsoleProject
     public class Program
     {
         static List<User> users = new List<User>();
+        const decimal MaxCreditAmount = 1000m;
+        const int MaxCreditMonths = 12;
         static void Main(string[] args)
         {
             while (true)
@@ -132,7 +134,7 @@ namespace ConsoleProject
                         if (exUser == null)
                         {
                             Console.WriteLine("Invalid email. If you don't have an account, please register.");
-                            break;
+                            return;
                         }
                         else
                             Console.WriteLine("Enter password: ");
@@ -143,6 +145,91 @@ namespace ConsoleProject
                         {
                             usr.FailedLoginAttempts = 0;
                             Console.WriteLine($"Logged in as {usr.Name} {usr.Surname}");
+                            var a = true;
+                            while (a)
+                            {
+                                Console.WriteLine("\nChoose an option: 1.Deposit\t 2.Withdraw\t 3.Credit\t 4.Show Balance\t 5.Logout");
+                                var logchoice = Console.ReadLine().Trim();
+                                switch (logchoice)
+                                {
+                                    case "1":
+                                        Console.WriteLine("Enter amount to deposit: ");
+                                        if (decimal.TryParse(Console.ReadLine(), out decimal amount))
+                                        {
+                                            usr.Balance += amount;
+                                            Console.WriteLine($"Deposited ${amount}. New balance: ${usr.Balance}.");
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Invalid amount. Please enter a numeric value.");
+                                        }
+                                        break;
+                                    case "2":
+                                        while (true)
+                                        {
+                                            Console.WriteLine("Enter amount to withdraw: ");
+                                            if (decimal.TryParse(Console.ReadLine(), out decimal amn))
+                                            {
+                                                if (amn <= usr.Balance)
+                                                {
+                                                    usr.Balance -= amn;
+                                                    Console.WriteLine($"Withdrew ${amn}. New balance: ${usr.Balance}.");
+                                                    break;
+                                                }
+                                                else
+                                                {
+                                                    Console.WriteLine("Insufficient funds. Please enter a smaller amount.");
+                                                }
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine("Invalid amount. Please enter a numeric value.");
+                                            }
+                                        }
+                                        break;
+                                    case "3":
+                                        if (!usr.IsEmployed)
+                                        {
+                                            Console.WriteLine("Credit is not available for unemployed users.");
+                                            break;
+                                        }
+                                        while (true)
+                                        {
+                                            Console.WriteLine($"Enter credit amount (Max ${MaxCreditAmount - usr.CreditBalance}): ");
+                                            if (decimal.TryParse(Console.ReadLine(), out decimal ant) && ant <= (MaxCreditAmount - usr.CreditBalance))
+                                            {
+                                                Console.WriteLine($"Enter credit period in months (Max {MaxCreditMonths}): ");
+                                                if (int.TryParse(Console.ReadLine(), out int months) && months <= MaxCreditMonths)
+                                                {
+                                                    decimal monthlyPayment = ant / months;
+                                                    usr.Balance += ant;
+                                                    usr.CreditBalance += ant;
+
+                                                    Console.WriteLine($"Credit approved. Monthly payment: ${monthlyPayment} for {months} months.");
+                                                    break;
+                                                }
+                                                else
+                                                {
+                                                    Console.WriteLine($"Max credit period exceeded. Max: {MaxCreditMonths} months.");
+                                                }
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine($"Credit limit exceeded. Max available: ${MaxCreditAmount - usr.CreditBalance}.");
+                                            }
+                                        }
+                                        break;
+                                    case "4":
+                                        Console.WriteLine($"Current balance: ${usr.Balance}.");
+                                        break;
+                                    case "5":
+                                        a = false;
+                                        break;
+                                    default:
+                                        Console.WriteLine("Invalid option. Please try again.");
+                                        break;
+                                }
+                            }
                         }
                         else
                         {
@@ -175,7 +262,11 @@ namespace ConsoleProject
                         Console.ReadLine();
                         break;
 
-
+                    case "3":
+                        return;
+                    default:
+                        Console.WriteLine("Invalid option. Please try again.");
+                        break;
                 }
             }
         }

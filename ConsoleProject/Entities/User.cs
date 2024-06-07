@@ -15,9 +15,8 @@ namespace ConsoleProject.Entities
         public string Mail { get; set; }
         public string Password { get; set; }
         public Decimal Balance { get; set; }
+        public Decimal CreditBalance { get; set; }
         public bool IsEmployed { get; set; }
         public int FailedLoginAttempts { get; set; }
-        public ICollection<Transaction> Transactions { get; set; }
-
     }
 }
